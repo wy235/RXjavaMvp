@@ -1,11 +1,13 @@
 package com.example.rxjavademo.main;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.rxjavademo.R;
 import com.example.rxjavademo.base.BaseActivity;
+import com.example.rxjavademo.exoplayer.SampleChooserActivity;
 import com.example.rxjavademo.main.bean.LivestockBean;
 import com.example.rxjavademo.main.model.MainModel;
 import com.example.rxjavademo.main.presenter.MainPresenter;
@@ -38,9 +40,11 @@ public class MainActivity extends BaseActivity<MainPresenter, MainModel> impleme
         mText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ApiParams params = new ApiParams();
+                Intent intent = new Intent(MainActivity.this, SampleChooserActivity.class);
+                startActivity(intent);
+              /*  ApiParams params = new ApiParams();
                 params.put("cattleId", "547");
-                mPresenter.getUserInfoService(params);
+                mPresenter.getUserInfoService(params);*/
             }
         });
     }
