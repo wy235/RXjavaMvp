@@ -62,6 +62,4 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:3.8.1'//添加HttpLoggingInterceptor进行调试
 
     implementation 'org.greenrobot:greendao:3.2.2'
-    implementation 'com.google.android.exoplayer:exoplayer:2.10.8'
-    implementation 'com.google.android.material:material:1.0.0'
 }
