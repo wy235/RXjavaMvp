@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.rxjavademo.R;
 import com.example.rxjavademo.base.BaseActivity;
+import com.example.rxjavademo.customview.CustomViewActivity;
 import com.example.rxjavademo.main.bean.LivestockBean;
 import com.example.rxjavademo.main.model.MainModel;
 import com.example.rxjavademo.main.presenter.MainPresenter;
@@ -28,6 +29,8 @@ public class MainActivity extends BaseActivity<MainPresenter, MainModel> impleme
     TextView mTouchEvent;
     @BindView(R.id.mScroviewEvent)
     TextView mScroviewEvent;
+    @BindView(R.id.mCustomView)
+    TextView mCustomView;
 
     @Override
     public int getLayoutId() {
@@ -62,6 +65,11 @@ public class MainActivity extends BaseActivity<MainPresenter, MainModel> impleme
 
         mScroviewEvent.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, ScroViewActivity.class);
+            startActivity(intent);
+        });
+
+        mCustomView.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, CustomViewActivity.class);
             startActivity(intent);
         });
     }
