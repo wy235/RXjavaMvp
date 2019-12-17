@@ -37,6 +37,7 @@ public class CustomCicleView extends View {
         int mode = MeasureSpec.getMode(widthMeasureSpec);
         int size = MeasureSpec.getSize(widthMeasureSpec);
         setMeasuredDimension(100, 100);
+
     }
 
     @Override
