@@ -14,8 +14,11 @@ import android.view.View;
  * 描述:
  */
 public class CustomCicleView extends View {
+    private final static String TAG = "CustomCicleView";
 
     private Paint mPaint = new Paint();
+    private int mDefaultX = 200;
+    private int mDefaultY = 200;
 
     public CustomCicleView(Context context) {
         super(context);
@@ -28,16 +31,59 @@ public class CustomCicleView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         mPaint.setColor(Color.RED);
-        canvas.drawCircle(200,200,200,mPaint);
+        canvas.drawCircle(mDefaultX,mDefaultY,200,mPaint);
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        int mode = MeasureSpec.getMode(widthMeasureSpec);
-        int size = MeasureSpec.getSize(widthMeasureSpec);
-        setMeasuredDimension(100, 100);
+        final int minWidth = getSuggestedMinimumWidth();
+        final int minHeight = getSuggestedMinimumHeight();
+        int width = measureWidth(minWidth,widthMeasureSpec);
+        int height = measureHeight(minHeight,heightMeasureSpec);
+        setMeasuredDimension(width, height);
+    }
 
+    private int measureWidth(int defaultWidth, int measureSpec) {
+        int specMode = MeasureSpec.getMode(measureSpec);
+        int specSize = MeasureSpec.getSize(measureSpec);
+        Log.e(TAG + "Width", "---speSize = " + specSize + "");
+        switch (specMode) {
+            case MeasureSpec.AT_MOST:
+                defaultWidth = mDefaultX + getPaddingLeft() + getPaddingRight();
+                Log.e(TAG + "Width", "---speMode = AT_MOST");
+                break;
+            case MeasureSpec.EXACTLY:
+                Log.e(TAG + "Width", "---speMode = EXACTLY");
+                defaultWidth = specSize;
+                break;
+            case MeasureSpec.UNSPECIFIED:
+                Log.e(TAG + "Width", "---speMode = UNSPECIFIED");
+                defaultWidth = Math.max(defaultWidth, specSize);
+        }
+        return defaultWidth;
+    }
+
+
+    private int measureHeight(int defaultHeight, int measureSpec) {
+        int specMode = MeasureSpec.getMode(measureSpec);
+        int specSize = MeasureSpec.getSize(measureSpec);
+        Log.e("Height", "---speSize = " + specSize + "");
+        switch (specMode) {
+            case MeasureSpec.AT_MOST:
+                defaultHeight = mDefaultY + getPaddingTop() + getPaddingBottom();
+                Log.e("Height", "---speMode = AT_MOST");
+                break;
+            case MeasureSpec.EXACTLY:
+                defaultHeight = specSize;
+                Log.e("Height", "---speSize = EXACTLY");
+                break;
+            case MeasureSpec.UNSPECIFIED:
+                defaultHeight = Math.max(defaultHeight, specSize);
+                Log.e("Height", "---speSize = UNSPECIFIED");
+                break;
+        }
+        return defaultHeight;
     }
 
     @Override
